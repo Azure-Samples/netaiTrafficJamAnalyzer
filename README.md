@@ -81,7 +81,7 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 1. Create a new  Codespace using the `Code` button at the top of the repository.
 
-![create Codespace](./images/17CreateCodeSpace.png)
+![create Codespace](./images/25CreateCodeSpace.png)
 
 1. The Codespace creation process can take a couple of minutes.
 

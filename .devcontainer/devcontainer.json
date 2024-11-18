@@ -1,17 +1,13 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
 {
-	"name": "C# (.NET) - Ollama",
+	"name": "C# (.NET)",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:9.0",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/devcontainers/features/github-cli:1": {},
         "ghcr.io/devcontainers/features/common-utils:2": {},
-        "ghcr.io/devcontainers/features/dotnet:2": {
-            "version": "none",
-            "dotnetRuntimeVersions": "9.0",
-            "aspNetCoreRuntimeVersions": "9.0"
-        },
-      "sshd": "latest"
+		"sshd": "latest"
     },
 
 	"customizations": {
@@ -19,11 +15,6 @@
 			"extensions": [
 				"GitHub.copilot",
 				"ms-dotnettools.csdevkit"
-			]
-		},
-		"codespaces": {
-			"openFiles": [
-			"./src/videos/firetruck.mp4"
 			]
 		}		
 	},
