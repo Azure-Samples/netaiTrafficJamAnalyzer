@@ -6,7 +6,7 @@
 [![Twitter: elbruno](https://img.shields.io/twitter/follow/elbruno.svg?style=social)](https://twitter.com/elbruno)
 ![GitHub: elbruno](https://img.shields.io/github/followers/elbruno?style=social)
 
-TrafficJamAnalyzer is an advanced tool designed to help monitor and analyze traffic conditions by processing images from CCTV cameras around the roads of Tenerife. [Tenerife CCTV Cameras Source](https://cic.tenerife.es/web3/mosaico_cctv/camaras_trafico_b.html)
+**TrafficJamAnalyzer** is an advanced tool designed to help monitor and analyze traffic conditions by processing images from CCTV cameras around the roads of Tenerife. [Tenerife CCTV Cameras Source](https://cic.tenerife.es/web3/mosaico_cctv/camaras_trafico_b.html)
 
 By utilizing artificial intelligence (AI) with Semantic Kernel and OpenAI, the application accurately assesses traffic density and identifies locations with potential traffic jams.
 
@@ -15,7 +15,6 @@ By utilizing artificial intelligence (AI) with Semantic Kernel and OpenAI, the a
 - [Getting started](#getting-started)
 - [Deploying to Azure](#deploying)
 - Run solution
-  <!-- - [Run in CodeSpaces](#run-in-github-codespaces) -->
   - [Run locally](#run-locally)
   - [Run the solution](#run-the-solution)
 - [Resources](#resources)
@@ -27,7 +26,7 @@ By utilizing artificial intelligence (AI) with Semantic Kernel and OpenAI, the a
 
 ## Features
 
-<!-- **(Coming soon!) GitHub CodeSpaces:** This project is designed to be opened in GitHub Codespaces as an easy way for anyone to try out these libraries entirely in the browser. -->
+**GitHub CodeSpaces:** This project is designed to be opened in GitHub Codespaces as an easy way for anyone to deploy the solution entirely in the browser.
 
 This is the Camera Traffic Jam Aplication running:
 
@@ -51,7 +50,7 @@ The solution is in the root folder, the main solution is **[TrafficJamAnalyzer.s
 
 ## Deploying
 
-Once you've opened the project in [Codespaces](#run-in-github-codespaces), or [locally](#run-locally), you can deploy it to Azure.
+Once you've opened the project in [Codespaces](#github-codespaces), or [locally](#run-locally), you can deploy it to Azure.
 
 From a Terminal window, open the folder with the clone of this repo and run the following commands.
 
@@ -77,7 +76,7 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 ![Deploy Azure Complete](./images/15DeployAzureComplete.png)
 
-<!-- ### Run in GitHub CodeSpaces
+### GitHub CodeSpaces
 
 1. Create a new  Codespace using the `Code` button at the top of the repository.
 
@@ -85,7 +84,7 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 1. The Codespace creation process can take a couple of minutes.
 
-1. Once the Codespace is loaded, it should have all the necessary requirements to run the demo projects. -->
+1. Once the Codespace is loaded, it should have all the necessary requirements to deploy the solution.
 
 ### Run Locally
 
