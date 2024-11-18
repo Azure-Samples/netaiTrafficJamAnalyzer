@@ -152,6 +152,12 @@ You may want to consider additional security measures, such as:
 
 ## Resources
 
+- This project is based on the original work from [Emiliano MontesdeOca](https://github.com/emimontesdeoca), in the repo [TrafficJamAnalyzer](https://github.com/emimontesdeoca/TrafficJamAnalyzer)
+
+- [Deploy a .NET Aspire project to Azure Container Apps using the Azure Developer CLI (in-depth guide)](https://learn.microsoft.com/dotnet/aspire/deployment/azure/aca-deployment-azd-in-depth)
+
+- [Aspiring .NET Applications with Azure OpenAI](https://learn.microsoft.com/shows/azure-developers-dotnet-aspire-day-2024/aspiring-dotnet-applications-with-azure-openai)
+
 ### Video Recordings
 
 [![.NET AI Community Standup - Beat Traffic Jams with .NET Aspire and GPT vision models](./images/35netaishow.png)](https://www.youtube.com/watch?v=AdV1tVGmmhQ)
