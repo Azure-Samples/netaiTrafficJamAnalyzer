@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrafficJamAnalyzer.ServiceDefaults\TrafficJamAnalyzer.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\TrafficJamAnalyzer.Shared.Clients\TrafficJamAnalyzer.Shared.Clients.csproj" />
+    <ProjectReference Include="..\TrafficJamAnalyzer.Shared.Models\TrafficJamAnalyzer.Shared.Models.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,287 @@
+﻿@page "/"
+@using System.Globalization
+@using TrafficJamAnalyzer.Shared.Clients
+@using TrafficJamAnalyzer.Shared.Models
+@inject WebApiClient WebApiClient
+@inject ScrapApiClient ScrapApiClient
+
+@attribute [StreamRendering]
+@rendermode InteractiveServer
+
+<div class="page-wrapper">
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+
+            <div class="row mt-4 mb-4">
+                <div class="col">
+                    <h1 class="pt-3 pb-5 text-center" style="font-size:50px">
+                        🚦TrafficJamAnalyzer<span class="page-pretitle" style="font-size:25px; text-transform: lowercase">.ai</span> 🛣️
+                    </h1>
+                    <div class="w-100  d-flex justify-content-center">
+
+                        <p class="mb-5 text-center text-secondary h2 w-75">
+                            TrafficJamAnalyzer is a tool that analyzes the images from the <a href="https://cic.tenerife.es/web3/mosaico_cctv/camaras_trafico_b.html" target="_blank">CCTV cameras</a> around the roads of Tenerife, then pass them trough AI to check if there's traffic at that specific road.
+                            <br>
+                            
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            @if (isLoading)
+            {
+                <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+                    <h1>Loading<span class="animated-dots"></span></h1>
+                </div>
+            }
+            else
+            {
+                @if (traffics is null || traffics.Length == 0)
+                {
+                    <div class="empty">
+                        <div class="empty-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <circle cx="12" cy="12" r="9" />
+                                <line x1="9" y1="10" x2="9.01" y2="10" />
+                                <line x1="15" y1="10" x2="15.01" y2="10" />
+                                <path d="M9.5 15.25a3.5 3.5 0 0 1 5 0" />
+                            </svg>
+                        </div>
+                        <p class="empty-title">No results found</p>
+                        <p class="empty-subtitle text-secondary">
+                            There's nothing here, you should start by fetching the data from the cameras!
+                        </p>
+                        <div class="empty-action">
+                            <a href="#" @onclick="Scrap" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="10" cy="10" r="7" />
+                                    <line x1="21" y1="21" x2="15" y2="15" />
+                                </svg>
+                                Fetch data from cameras
+                            </a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="row row-cards">
+                        @foreach (var item in traffics.Where(x => x.Enabled))
+                        {
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center">
+                                            <div class="pe-3">
+                                                <span class="avatar avatar-lg" style="background-image: url(@item.Url)"></span>
+                                            </div>
+                                            <div class="w-100">
+                                                <div class="subheader">@FormatDateTime(item.Results.OrderByDescending(x => x.Id).FirstOrDefault()?.CreatedAt)</div>
+                                                <div class="d-flex align-items-baseline">
+                                                    <div class="h1 mb-3 me-2">@item.Title</div>
+                                                    <div class="ms-auto lh-1">
+                                                        <a href="#" @onclick="@(() => ToggleTraffic(item.Id))" class="icon d-none d-md-inline-block ms-3 text-red">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" stroke-width="0" fill="currentColor"></path>
+                                                            </svg>
+                                                        </a>
+                                                        <a href="@item.Url" target="_blank" class="icon d-none d-md-inline-block ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-link"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 15l6 -6" /><path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" /><path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" /></svg>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <div class="tracking">
+                                                        @foreach (var result in GetPaddedResults(item.Results.OrderByDescending(x => x.Id).Take(50).ToList()))
+                                                        {
+                                                            <div class="tracking-block @GetTrackingBlockCss(result?.TrafficAmount ?? 0) cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="@($"{result?.TrafficAmount ?? 0} - {result?.CreatedAt ?? "No data"}")"></div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                    <div class="row g-2 align-items-center  mt-4 mb-4">
+                        <div class="col">
+                            <h2 class="page-title">
+                                Available cameras to analyze
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div class="row g-2 align-items-center">
+                        @foreach (var traffic in traffics.OrderByDescending(x => !x.Enabled))
+                        {
+                            <div class="col-4">
+                                <div class="card card-sm ">
+
+                                    <div class="d-flex align-items-center p-3 mt-auto">
+                                        <span class="avatar avatar-md" style="background-image: url(@traffic.Url)"></span>
+                                        <div class="ms-3">
+                                            <div class="h2 mb-0">@traffic.Title</div>
+                                            <a href="#" class="text-body subheader">@traffic.Url</a>
+                                        </div>
+                                        <div class="ms-auto">
+                                            <a href="#" @onclick="@(() => ToggleTraffic(traffic.Id))" class="icon d-none d-md-inline-block ms-3 text-red">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+@if (isLoading)
+{
+
+}
+
+@code {
+    private TrafficEntry[]? traffics;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            traffics = await WebApiClient.GetTrafficAsync();
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task Scrap()
+    {
+        isLoading = true;
+
+        var data = await ScrapApiClient.ScrapAsync();
+
+        foreach (var item in data)
+        {
+            var traffic = new TrafficEntry
+                {
+                    CreatedAt = DateTime.UtcNow,
+                    Enabled = false,
+                    Title = "Entry",
+                    UpdatedAt = DateTime.UtcNow,
+                    Url = item
+                };
+            await WebApiClient.AddTrafficAsync(traffic);
+        }
+
+        traffics = await WebApiClient.GetTrafficAsync();
+        isLoading = false;
+    }
+
+    private async Task ToggleTraffic(int id)
+    {
+        var success = await WebApiClient.ToggleTrafficAsync(id);
+        if (success)
+        {
+            var traffic = traffics?.FirstOrDefault(t => t.Id == id);
+            if (traffic is not null)
+            {
+                traffic.Enabled = !traffic.Enabled;
+                StateHasChanged();
+            }
+        }
+    }
+
+    string GetDate(DateTime? fecha)
+    {
+        if (fecha is null)
+        {
+            return "-";
+        }
+        else
+        {
+            DateTime ahora = DateTime.Now;
+            TimeSpan diferencia = (DateTime)fecha - ahora;
+
+            if (diferencia.TotalSeconds < 0)
+            {
+                return "La fecha proporcionada ya ha pasado.";
+            }
+
+            int dias = diferencia.Days;
+            int horas = diferencia.Hours;
+            int minutos = diferencia.Minutes;
+            int segundos = diferencia.Seconds;
+
+            return $"{dias} día{(dias != 1 ? "s" : "")} {horas} hora{(horas != 1 ? "s" : "")} {minutos} minuto{(minutos != 1 ? "s" : "")} {segundos} segundo{(segundos != 1 ? "s" : "")}";
+
+        }
+    }
+
+    public static string GetTrackingBlockCss(int value)
+    {
+        if (value >= 0 && value < 50)
+        {
+            return "bg-success";
+        }
+        else if (value >= 50 && value < 80)
+        {
+            return "bg-warning";
+        }
+        else if (value >= 80 && value <= 100)
+        {
+            return "bg-danger";
+        }
+        else
+        {
+            return ""; // default case if the value is not between 0 and 100
+        }
+    }
+
+    private List<TrafficResult> GetPaddedResults(List<TrafficResult> results)
+    {
+        var paddedResults = results.ToList();
+
+        // Add default Results if fewer than 50
+        while (paddedResults.Count < 50)
+        {
+            paddedResults.Add(new() { TrafficAmount = -1 }); // Null will represent missing data
+        }
+
+        return paddedResults.OrderBy(x => x.CreatedAt).ToList();
+    }
+
+    static string FormatDateTime(string inputDateTime)
+    {
+        // Parse the input date-time string
+        DateTime parsedDateTime;
+        if (DateTime.TryParse(inputDateTime, out parsedDateTime))
+        {
+            // Format the date-time as "dd of MMMM yyyy 'at' HH:mm"
+            string formattedDateTime = parsedDateTime.ToString("dd 'of' MMMM yyyy 'at' HH:mm", CultureInfo.InvariantCulture);
+            return formattedDateTime;
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+	"name": "C# (.NET) - Ollama",
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/common-utils:2": {},
+        "ghcr.io/devcontainers/features/dotnet:2": {
+            "version": "none",
+            "dotnetRuntimeVersions": "9.0",
+            "aspNetCoreRuntimeVersions": "9.0"
+        },
+      "sshd": "latest"
+    },
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"GitHub.copilot",
+				"ms-dotnettools.csdevkit"
+			]
+		},
+		"codespaces": {
+			"openFiles": [
+			"./src/videos/firetruck.mp4"
+			]
+		}		
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [17057],
+	"portsAttributes": {
+			"17057": {
+				"protocol": "http"
+			}
+	},
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "sudo dotnet workload update && sudo dotnet workload install aspire && sudo dotnet workload list",
+	"postStartCommand": "",
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "vscode",
+    "hostRequirements": {
+        "memory": "16gb",
+        "cpus": 4
+    }
+}
