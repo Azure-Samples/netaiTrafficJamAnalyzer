@@ -1,4 +1,4 @@
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/netaitrafficjamanalyzer)
+<!-- [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/netaitrafficjamanalyzer) -->
 
 ## Description
 
@@ -15,7 +15,7 @@ By utilizing artificial intelligence (AI) with Semantic Kernel and OpenAI, the a
 - [Getting started](#getting-started)
 - [Deploying to Azure](#deploying)
 - Run solution
-  - [Run in CodeSpaces](#run-in-github-codespaces)
+  <!-- - [Run in CodeSpaces](#run-in-github-codespaces) -->
   - [Run locally](#run-locally)
   - [Run the solution](#run-the-solution)
 - [Resources](#resources)
@@ -27,9 +27,9 @@ By utilizing artificial intelligence (AI) with Semantic Kernel and OpenAI, the a
 
 ## Features
 
-**(Coming soon!) GitHub CodeSpaces:** This project is designed to be opened in GitHub Codespaces as an easy way for anyone to try out these libraries entirely in the browser.
+<!-- **(Coming soon!) GitHub CodeSpaces:** This project is designed to be opened in GitHub Codespaces as an easy way for anyone to try out these libraries entirely in the browser. -->
 
-This is the sample running:
+This is the Camera Traffic Jam Aplication running:
 
 ![Camera Dashboard](./images/01CameraTrafficJam.png)
 
@@ -77,7 +77,7 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 ![Deploy Azure Complete](./images/15DeployAzureComplete.png)
 
-### Run in GitHub CodeSpaces
+<!-- ### Run in GitHub CodeSpaces
 
 1. Create a new  Codespace using the `Code` button at the top of the repository.
 
@@ -85,7 +85,7 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 1. The Codespace creation process can take a couple of minutes.
 
-1. Once the Codespace is loaded, it should have all the necessary requirements to run the demo projects.
+1. Once the Codespace is loaded, it should have all the necessary requirements to run the demo projects. -->
 
 ### Run Locally
 
