@@ -17,6 +17,7 @@ By utilizing artificial intelligence (AI) with Semantic Kernel and OpenAI, the a
 - Run solution
   - [Run locally](#run-locally)
   - [Run the solution](#run-the-solution)
+  - [Local dev using an existing model](#local-development-using-an-existing-gpt-4o-model)
 - [Resources](#resources)
 - [Video Recordings](#video-recordings)
 - [Guidance](#guidance)
@@ -121,6 +122,25 @@ dotnet run
 - You can expect an output similar to this one:
 
 ![Run solution console output](./images/20DotNetRunAppHost.png)
+
+### Local development using an existing gpt-4o model
+
+In order to use an existing gpt-4o model, you need to define the specific connection string in the `AIApiService` project.
+
+Add a user secret with the configuration:
+
+```bash
+{
+  "ConnectionStrings:openaiTraffic": "Endpoint=https://<endpoint>.openai.azure.com/;Key=<modelkey>;"
+}
+```
+
+Otherwise, set `openAiClientName` to `openai`, in the `program.cs`.
+
+```csharp
+var openAiClientName = "openai";
+builder.AddAzureOpenAIClient(openAiClientName);
+```
 
 ## Guidance
 
