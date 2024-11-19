@@ -165,4 +165,4 @@ You may want to consider additional security measures, such as:
 
 - [.NET AI Community Standup - Level Up with .NET 9, AI, Aspire and Azure! 🚦 ![.NET AI Community Standup - Level Up with .NET 9, AI, Aspire and Azure! 🚦](./images/45netaiupgradenet9.png)](https://www.youtube.com/watch?v=qtLOXk1D3Qs)
 
-- [Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦🚀 ![Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦🚀](./images/48ebytdeploycodespaces.png)](https://youtu.be/rM0AdkoCWn0)
+- [Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦 ![Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦🚀](./images/48ebytdeploycodespaces.png)](https://youtu.be/rM0AdkoCWn0)
