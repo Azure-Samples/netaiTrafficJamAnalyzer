@@ -13,7 +13,7 @@
         },
         "ghcr.io/azure/azure-dev/azd:0": {
             "version": "stable"
-        }		
+        },		
 		"sshd": "latest"
     },
 
