@@ -3,6 +3,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c5800bca-a854-4ca6-a754-4be91470fabb</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrafficJamAnalyzer.ServiceDefaults\TrafficJamAnalyzer.ServiceDefaults.csproj" />

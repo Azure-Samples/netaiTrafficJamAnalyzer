@@ -10,9 +10,6 @@ using OpenAI.Chat;
 var builder = WebApplication.CreateBuilder(args);
 var kernelBuilder = Kernel.CreateBuilder();
 
-//var deploymentName = builder.Configuration["OpenAI:DeploymentName"];
-//var endpoint = builder.Configuration["OpenAI:Endpoint"];
-//var apiKey = builder.Configuration["OpenAI:ApiKey"];
 var prompt = builder.Configuration["OpenAI:Prompt"];
 var systemPrompt = "You are a useful assistant that replies using a direct style";
 
@@ -27,13 +24,15 @@ builder.AddServiceDefaults();
 builder.Services.AddProblemDetails();
 
 // Add OpenAI
-// kernelBuilder.AddAzureOpenAIChatCompletion(deploymentName!, endpoint!, apiKey!);
-builder.AddAzureOpenAIClient("openai");
+var openAiClientName = builder.Environment.IsDevelopment() ? "openaiTraffic" : "chat";
+builder.AddAzureOpenAIClient(openAiClientName);
 
 // get chat client from aspire hosting configuration
 builder.Services.AddSingleton(serviceProvider =>
 {
     var config = serviceProvider.GetService<IConfiguration>()!;
+    var logger = serviceProvider.GetService<ILogger<Program>>()!;
+    logger.LogInformation($"Chat client configuration, modelId: {config["AI_ChatDeploymentName"]}");
     OpenAIClient client = serviceProvider.GetRequiredService<OpenAIClient>();
     var chatClient = client.GetChatClient(config["AI_ChatDeploymentName"]);
     return chatClient;
@@ -41,10 +40,9 @@ builder.Services.AddSingleton(serviceProvider =>
 
 var app = builder.Build();
 var logger = app.Logger;
+logger.LogInformation("Application starting up.");
+logger.LogInformation($"Azure OpenAI Client using: {openAiClientName}");
 var kernel = kernelBuilder.Build();
-
-//// build chat
-//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
