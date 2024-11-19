@@ -76,6 +76,8 @@ From a Terminal window, open the folder with the clone of this repo and run the 
 
 ![Deploy Azure Complete](./images/15DeployAzureComplete.png)
 
+1. You can check this video with a 5 minutes overview of the deploy process from codespaces: [Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦🚀](https://youtu.be/rM0AdkoCWn0).
+
 ### GitHub CodeSpaces
 
 1. Create a new  Codespace using the `Code` button at the top of the repository.
@@ -159,4 +161,8 @@ You may want to consider additional security measures, such as:
 
 ### Video Recordings
 
-[![.NET AI Community Standup - Beat Traffic Jams with .NET Aspire and GPT vision models](./images/35netaishow.png)](https://www.youtube.com/watch?v=AdV1tVGmmhQ)
+- [.NET AI Community Standup - Beat Traffic Jams with .NET Aspire and GPT vision models ![.NET AI Community Standup - Beat Traffic Jams with .NET Aspire and GPT vision models](./images/40netaitrafficjam.png)](https://www.youtube.com/watch?v=AdV1tVGmmhQ)
+
+- [.NET AI Community Standup - Level Up with .NET 9, AI, Aspire and Azure! 🚦 ![.NET AI Community Standup - Level Up with .NET 9, AI, Aspire and Azure! 🚦](./images/45netaiupgradenet9.png)](https://www.youtube.com/watch?v=qtLOXk1D3Qs)
+
+- [Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦🚀 ![Deploy Your AI Traffic Jam Analyzer to Azure in Minutes! 🚦🚀](./images/48ebytdeploycodespaces.png)](https://youtu.be/rM0AdkoCWn0)
