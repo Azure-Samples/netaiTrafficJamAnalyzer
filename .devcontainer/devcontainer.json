@@ -5,7 +5,6 @@
     "image": "mcr.microsoft.com/devcontainers/dotnet:9.0",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-        "ghcr.io/devcontainers/features/github-cli:1": {},
         "ghcr.io/devcontainers/features/common-utils:2": {},
 		"ghcr.io/devcontainers/features/azure-cli:1": {
             "installBicep": true,
@@ -21,7 +20,8 @@
 		"vscode": {
 			"extensions": [
 				"GitHub.copilot",
-				"ms-dotnettools.csdevkit"
+				"ms-dotnettools.csdevkit",
+				"ms-azuretools.vscode-azure-github-copilot"
 			]
 		}		
 	},
