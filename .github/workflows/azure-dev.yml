@@ -27,6 +27,11 @@ jobs:
       - name: Install azd 
         uses: Azure/setup-azd@v1.0.0
 
+      - name: Install .NET 9
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
       - name: Run Microsoft Security DevOps Analysis
         uses: microsoft/security-devops-action@v1
         id: msdo
