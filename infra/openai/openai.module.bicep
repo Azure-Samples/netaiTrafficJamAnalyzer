@@ -5,14 +5,23 @@ param principalId string
 
 param principalType string
 
+param allowedIpRules array = []
+param networkAcls object = empty(allowedIpRules) ? {
+  defaultAction: 'Allow'
+} : {
+  ipRules: allowedIpRules
+  defaultAction: 'Deny'
+}
+
 resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' = {
   name: take('openai-${uniqueString(resourceGroup().id)}', 64)
   location: location
   kind: 'OpenAI'
   properties: {
     customSubDomainName: toLower(take(concat('openai', uniqueString(resourceGroup().id)), 24))
-    disableLocalAuth: true
     publicNetworkAccess: 'Disabled'
+    networkAcls: networkAcls
+    disableLocalAuth: true
   }
   sku: {
     name: 'S0'
