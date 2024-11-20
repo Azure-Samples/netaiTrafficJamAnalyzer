@@ -11,7 +11,7 @@ resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' = {
   kind: 'OpenAI'
   properties: {
     customSubDomainName: toLower(take(concat('openai', uniqueString(resourceGroup().id)), 24))
-    publicNetworkAccess: 'Enabled'
+    // publicNetworkAccess: 'Enabled'
     disableLocalAuth: true
   }
   sku: {
