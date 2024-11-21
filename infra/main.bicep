@@ -47,6 +47,7 @@ module openai 'openai/openai.module.bicep' = {
     location: location
     principalId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
     principalType: 'ServicePrincipal'
+    customSubDomainName: toLower(take(concat('openai', uniqueString(rg.id)), 24))
   }
 }
 output MANAGED_IDENTITY_CLIENT_ID string = resources.outputs.MANAGED_IDENTITY_CLIENT_ID
