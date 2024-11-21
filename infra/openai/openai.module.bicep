@@ -7,9 +7,14 @@ param principalType string
 
 @description('The custom subdomain name for the OpenAI Cognitive Services account.')
 param customSubDomainName string
+@description('The kind of Cognitive Services account to create.')
+param name string
 
 @allowed([ 'Enabled', 'Disabled' ])
 param publicNetworkAccess string = 'Enabled'
+
+param disableLocalAuth bool = false
+param kind string = 'OpenAI'
 
 param allowedIpRules array = []
 param networkAcls object = empty(allowedIpRules) ? {
@@ -18,20 +23,21 @@ param networkAcls object = empty(allowedIpRules) ? {
   ipRules: allowedIpRules
   defaultAction: 'Deny'
 }
+param sku object = {
+  name: 'S0'
+}
 
 resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' = {
-  name: take('openai-${uniqueString(resourceGroup().id)}', 64)
+  name: name
   location: location
-  kind: 'OpenAI'
+  kind: kind
   properties: {
     customSubDomainName: customSubDomainName
     publicNetworkAccess: publicNetworkAccess
     networkAcls: networkAcls
-    disableLocalAuth: true
+    disableLocalAuth: disableLocalAuth
   }
-  sku: {
-    name: 'S0'
-  }
+  sku: sku
   tags: {
     'aspire-resource-name': 'openai'
   }
@@ -48,6 +54,7 @@ resource openai_CognitiveServicesOpenAIContributor 'Microsoft.Authorization/role
 }
 
 resource chat 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = {
+  parent: openai
   name: 'chat'
   properties: {
     model: {
@@ -55,12 +62,12 @@ resource chat 'Microsoft.CognitiveServices/accounts/deployments@2024-10-01' = {
       name: 'gpt-4o'
       version: '2024-05-13'
     }
+    raiPolicyName: 'raiPolicyName'
   }
   sku: {
     name: 'GlobalStandard'
     capacity: 10
   }
-  parent: openai
 }
 
 output connectionString string = 'Endpoint=${openai.properties.endpoint}'
