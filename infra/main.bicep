@@ -45,7 +45,7 @@ module openai 'openai/openai.module.bicep' = {
   scope: rg
   params: {
     location: location
-    principalId: principalId //resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
+    principalId: resources.outputs.MANAGED_IDENTITY_PRINCIPAL_ID
     principalType: 'ServicePrincipal'
   }
 }
