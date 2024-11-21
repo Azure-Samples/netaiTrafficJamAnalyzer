@@ -54,8 +54,6 @@ resource storageVolume 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   }
   properties: {
     largeFileSharesState: 'Enabled'
-    minimumTlsVersion: 'TLS1_2'
-    allowBlobPublicAccess: false
   }
 }
 
