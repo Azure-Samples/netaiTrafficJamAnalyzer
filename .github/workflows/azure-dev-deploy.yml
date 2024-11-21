@@ -41,9 +41,10 @@ jobs:
         shell: pwsh
 
       - name: Azd Down and Purge existing Infrastructure
+        continue-on-error: true
         run: |
-          echo 'running azd down --no-prompt --purge'
-          azd down --no-prompt  --purge
+          echo 'running azd down --no-prompt --force --purge'
+          azd down --no-prompt --force --purge
         env:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
@@ -51,6 +52,7 @@ jobs:
           CREATE_ROLE_FOR_USER: false
 
       - name: Provision Infrastructure
+        continue-on-error: true
         run: |
           echo 'Provision Infrastructure azd provision'
           azd provision --no-prompt
