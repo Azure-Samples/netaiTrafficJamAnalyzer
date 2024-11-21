@@ -55,7 +55,7 @@ jobs:
         continue-on-error: true
         run: |
           echo 'Provision Infrastructure azd provision'
-          azd provision --no-prompt
+          azd provision --no-prompt --preview 
         env:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
