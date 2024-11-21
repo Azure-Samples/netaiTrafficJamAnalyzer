@@ -11,9 +11,9 @@ param customSubDomainName string
 param name string
 
 @allowed([ 'Enabled', 'Disabled' ])
-param publicNetworkAccess string = 'Enabled'
+param publicNetworkAccess string = 'Disabled'
 
-param disableLocalAuth bool = false
+param disableLocalAuth bool = true
 param kind string = 'OpenAI'
 
 param allowedIpRules array = []
@@ -34,7 +34,11 @@ resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' = {
   properties: {
     customSubDomainName: customSubDomainName
     publicNetworkAccess: publicNetworkAccess
-    networkAcls: networkAcls
+    networkAcls: {
+      ipRules: allowedIpRules
+      bypass: 'AzureServices'      
+      defaultAction: 'Deny'
+    }
     disableLocalAuth: disableLocalAuth
   }
   sku: sku
