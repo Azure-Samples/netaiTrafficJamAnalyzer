@@ -8,19 +8,11 @@ param tags object = {}
 
 var resourceToken = uniqueString(resourceGroup().id)
 
-// add a log here before creating the 1st resource
-// this will help to identify the start of the deployment
-output deploymentStart string = 'Deployment started - Bruno'
-
 resource managedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: 'mi-${resourceToken}'
   location: location
   tags: tags
 }
-
-// Log after creating the managed identity
-output managedIdentityCreated string = 'Managed Identity created - Bruno'
-output managedIdentityName string = managedIdentity.name
 
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' = {
   name: replace('acr-${resourceToken}', '-', '')
@@ -31,10 +23,6 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' =
   tags: tags
 }
 
-// Log after creating the container registry
-output containerRegistryCreated string = 'Container Registry created - Bruno'
-output containerRegistryName string = containerRegistry.name
-
 resource caeMiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(containerRegistry.id, managedIdentity.id, subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d'))  
   scope: containerRegistry
@@ -44,10 +32,6 @@ resource caeMiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01
     roleDefinitionId:  subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
   }
 }
-
-// Log after creating the role assignment
-output roleAssignmentCreated string = 'Role Assignment created - Bruno'
-output roleAssignmentName string = caeMiRoleAssignment.name
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: 'law-${resourceToken}'

@@ -54,7 +54,6 @@ jobs:
           CREATE_ROLE_FOR_USER: false
 
       - name: Provision Infrastructure
-        continue-on-error: true
         run: |
           echo 'Provision Infrastructure azd provision'
           azd provision --no-prompt
