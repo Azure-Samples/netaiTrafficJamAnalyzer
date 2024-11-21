@@ -8,6 +8,8 @@ param principalType string
 @description('The custom subdomain name for the OpenAI Cognitive Services account.')
 param customSubDomainName string
 
+@allowed([ 'Enabled', 'Disabled' ])
+param publicNetworkAccess string = 'Enabled'
 
 param allowedIpRules array = []
 param networkAcls object = empty(allowedIpRules) ? {
@@ -22,7 +24,8 @@ resource openai 'Microsoft.CognitiveServices/accounts@2024-10-01' = {
   location: location
   kind: 'OpenAI'
   properties: {
-    customSubDomainName: customSubDomainName 
+    customSubDomainName: customSubDomainName
+    publicNetworkAccess: publicNetworkAccess
     networkAcls: networkAcls
     disableLocalAuth: true
   }
