@@ -43,7 +43,9 @@ jobs:
         shell: pwsh
 
       - name: Provision Infrastructure
-        run:  azd provision --no-prompt
+        run: |
+          echo 'Provision Infrastructure azd provision'
+          azd provision --no-prompt
         env:
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
