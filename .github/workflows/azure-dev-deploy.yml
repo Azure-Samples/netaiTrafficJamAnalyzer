@@ -1,8 +1,6 @@
-on:
+name: Labs Deploy
+on: 
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 permissions:
   id-token: write
@@ -31,26 +29,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '9.0.x'
-
-      - name: Log in with Azure (Federated Credentials)
-        if: ${{ env.AZURE_CLIENT_ID != '' }}
-        run: |
-          azd auth login `
-            --client-id "$Env:AZURE_CLIENT_ID" `
-            --federated-credential-provider "github" `
-            --tenant-id "$Env:AZURE_TENANT_ID"
-        shell: pwsh
-
-      - name: Run Microsoft Security DevOps Analysis
-        uses: microsoft/security-devops-action@v1
-        id: msdo
-        with:
-          tools: templateanalyzer
-
-      - name: Upload results to Security tab
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: ${{ steps.msdo.outputs.sarifFile }}
 
       - name: Log in with Azure (Federated Credentials)
         if: ${{ env.AZURE_CLIENT_ID != '' }}
