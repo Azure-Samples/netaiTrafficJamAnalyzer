@@ -1,4 +1,4 @@
-name: Template Validation Workflow
+name: AI Gallery - Template Validation Workflow
 on: 
   workflow_dispatch:
 
