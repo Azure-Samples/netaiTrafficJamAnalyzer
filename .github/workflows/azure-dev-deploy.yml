@@ -1,4 +1,4 @@
-name: Labs Deploy
+name: Manual Deploy to Azure
 on: 
   workflow_dispatch:
 
