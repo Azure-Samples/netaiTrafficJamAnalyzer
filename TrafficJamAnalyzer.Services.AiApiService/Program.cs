@@ -1,6 +1,3 @@
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using TrafficJamAnalyzer.Shared.Models;
 using OpenAI;
