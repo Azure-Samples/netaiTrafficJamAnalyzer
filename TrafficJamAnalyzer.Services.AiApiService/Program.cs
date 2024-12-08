@@ -5,7 +5,6 @@ using OpenAI.Chat;
 
 // Builder
 var builder = WebApplication.CreateBuilder(args);
-var kernelBuilder = Kernel.CreateBuilder();
 
 var prompt = builder.Configuration["OpenAI:Prompt"];
 var systemPrompt = "You are a useful assistant that replies using a direct style";
@@ -39,7 +38,6 @@ var app = builder.Build();
 var logger = app.Logger;
 logger.LogInformation("Application starting up.");
 logger.LogInformation($"Azure OpenAI Client using: {openAiClientName}");
-var kernel = kernelBuilder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
