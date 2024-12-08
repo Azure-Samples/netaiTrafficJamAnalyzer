@@ -24,7 +24,7 @@ builder.AddServiceDefaults();
 builder.Services.AddProblemDetails();
 
 // Add OpenAI
-var openAiClientName = builder.Environment.IsDevelopment() ? "openaiTraffic" : "openai";
+var openAiClientName = builder.Environment.IsDevelopment() ? "openaidev" : "openai";
 builder.AddAzureOpenAIClient(openAiClientName);
 
 // get chat client from aspire hosting configuration

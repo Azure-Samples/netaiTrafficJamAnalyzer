@@ -52,20 +52,25 @@ public static class Extensions
             logging.IncludeScopes = true;
         });
 
+        // enable openai telemetry
+        AppContext.SetSwitch("OpenAI.Experimental.EnableOpenTelemetry", true);
+
         builder.Services.AddOpenTelemetry()
             .WithMetrics(metrics =>
             {
                 metrics.AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation()
-                    .AddRuntimeInstrumentation();
+                    .AddRuntimeInstrumentation()
+                    .AddMeter("OpenAI.*");
+
             })
             .WithTracing(tracing =>
             {
                 tracing.AddAspNetCoreInstrumentation()
                     // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
                     //.AddGrpcClientInstrumentation()
-                    .AddHttpClientInstrumentation();
-            });
+                    .AddHttpClientInstrumentation()
+                    .AddSource("OpenAI.*");             });
 
         builder.AddOpenTelemetryExporters();
 
